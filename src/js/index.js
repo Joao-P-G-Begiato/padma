@@ -1,6 +1,7 @@
 console.log("teste")
 
 const loginForm = document.getElementById('login-form')
+const registerForm = document.getElementById('registerUserForm')
 
 
 loginForm.addEventListener('submit', async function(e){
@@ -34,7 +35,58 @@ loginForm.addEventListener('submit', async function(e){
     }
 })
 
+registerForm.addEventListener('submit', async function(e){
+    e.preventDefault()
+    console.log("Oi")
+    const payload = {
+        name: document.getElementById('userName').value,
+        login: document.getElementById('userLogin').value,
+        password: document.getElementById('userPassword').value,
+        confirmPassword: document.getElementById('userConfirmPassword').value
+    }
+    try{
+        const requisition = await postUser(payload)
+        console.log(requisition)
+        alert("usuario " + requisition.login+ " cadastrado com sucesso")
+        document.getElementById('userName').value = ""
+        document.getElementById('userLogin').value = ""
+        document.getElementById('userPassword').value = ""
+        document.getElementById('userConfirmPassword').value = ""
+//padma-auth.onrender.com/createUser
+    }catch(e){
+        console.log(e)
+        if(e.response.data.message == "Password and Confirmation don't match"){
+            alert("Senha e Confirmação devem ser iguais")
+        }
+        if(e.response.data.message == "User already exists. contact the service administrator"){
+            alert("Usuário já cadastrado")
+        }
+        if(e.response.data.message == "Param password need to contain a Number, a Uppercase , a lowercase, 8 digits and a special caracter between the followings: !@#$%¨&*+_¹²³£¢¬§"){
+            alert("A senha precisa conter 8 digitos, uma letra maiúscula, uma letra minúscula e o um caracter especial dentre os seguintes: !@#$%¨&*+_¹²³£¢¬§ ")
+        }
+        if(e.response.data.message == "Missing Param password"){
+            alert("a senha é obrigatória")
+        }
+        if(e.response.data.message == "Missing Param login"){
+            alert("o Login é obrigatório")
+        }
+        if(e.response.data.message == "Missing Param name"){
+            alert("o nome é obrigatória")
+        }
+        if(e.response.data.message == "Missing Param password confirmation"){
+            alert("a confirmação de senha é obrigatória")
+        }
+    }
+    })
+
 async function getAuth (url){
     const response = await axios.get(url)
     return response.data
 }
+
+async function postUser (payload){
+    const url = "https://padma-auth.onrender.com/createUser"
+    const response = await axios.post(url, payload)
+    return response.data
+}
+

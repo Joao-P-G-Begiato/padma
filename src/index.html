@@ -40,14 +40,20 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="registerUserForm">
+                <form id="registerUserForm" class="registerUserForm">
                     <label>Nome Completo:</label>
-                    <input type="text" id="userName">
+                    <input type="text" required id="userName" >
+                    <label>Login</label>
+                    <input type="text" required id="userLogin" >
+                    <label>Senha:</label>
+                    <input type="password" required id="userPassword">
+                    <label>Confirmação de Senha:</label>
+                    <input type="password" required id="userConfirmPassword">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-success">Cadastrar Usuário</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-success">Cadastrar Usuário</button>
             </div>
           </div>
         </div>
