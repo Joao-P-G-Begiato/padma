@@ -13,7 +13,9 @@ loginForm.addEventListener('submit', async function(e){
         const getToken = await getAuth(url)
         console.log(getToken)
         sessionStorage.setItem('token', getToken.token)
-        window.open("../../pages/home.html", "_self")
+        sessionStorage.setItem('name', getToken.name)
+        sessionStorage.setItem('admin', getToken.role)
+        window.open("../pages/home.html", "_self")
     }catch(e){
         const main = document.getElementsByTagName("main")
         const section = document.getElementsByTagName("section")[0]

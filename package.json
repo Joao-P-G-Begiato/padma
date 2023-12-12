@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Joao-P-G-Begiato/padma.git"
@@ -18,7 +17,6 @@
     "url": "https://github.com/Joao-P-G-Begiato/padma/issues"
   },
   "homepage": "https://github.com/Joao-P-G-Begiato/padma#readme",
-
   "dependencies": {
     "dotenv": "^16.3.1",
     "jsonwebtoken": "^9.0.2"
