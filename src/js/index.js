@@ -52,29 +52,29 @@ registerForm.addEventListener('submit', async function(e){
         document.getElementById('userLogin').value = ""
         document.getElementById('userPassword').value = ""
         document.getElementById('userConfirmPassword').value = ""
-//padma-auth.onrender.com/createUser
+        
     }catch(e){
-        console.log(e)
+        let messageError = ""
         if(e.response.data.message == "Password and Confirmation don't match"){
-            alert("Senha e Confirmação devem ser iguais")
+            messageError = "Senha e Confirmação devem ser iguais"
         }
         if(e.response.data.message == "User already exists. contact the service administrator"){
-            alert("Usuário já cadastrado")
+            messageError = "Usuário já cadastrado"
         }
         if(e.response.data.message == "Param password need to contain a Number, a Uppercase , a lowercase, 8 digits and a special caracter between the followings: !@#$%¨&*+_¹²³£¢¬§"){
-            alert("A senha precisa conter 8 digitos, uma letra maiúscula, uma letra minúscula e o um caracter especial dentre os seguintes: !@#$%¨&*+_¹²³£¢¬§ ")
+            messageError = "A senha precisa conter 8 digitos, uma letra maiúscula, uma letra minúscula e o um caracter especial dentre os seguintes: !@#$%¨&*+_¹²³£¢¬§ "
         }
         if(e.response.data.message == "Missing Param password"){
-            alert("a senha é obrigatória")
+            messageError = "a senha é obrigatória"
         }
         if(e.response.data.message == "Missing Param login"){
-            alert("o Login é obrigatório")
+            messageError = "o Login é obrigatório"
         }
         if(e.response.data.message == "Missing Param name"){
-            alert("o nome é obrigatória")
+            messageError = "o nome é obrigatória"
         }
         if(e.response.data.message == "Missing Param password confirmation"){
-            alert("a confirmação de senha é obrigatória")
+            messageError = "a confirmação de senha é obrigatória"
         }
     }
     })
