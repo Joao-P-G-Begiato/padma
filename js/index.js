@@ -1,7 +1,7 @@
-console.log("teste")
-
 const loginForm = document.getElementById('login-form')
 const registerForm = document.getElementById('registerUserForm')
+const closeModalBtn = document.getElementsByClassName('btn-close')[0]
+const modal = document.getElementById('registerFormModal')
 
 
 loginForm.addEventListener('submit', async function(e){
@@ -11,7 +11,6 @@ loginForm.addEventListener('submit', async function(e){
     const url = "https://padma-auth.onrender.com/auth/" + login +"?password=" + password
     try{
         const getToken = await getAuth(url)
-        console.log(getToken)
         sessionStorage.setItem('token', getToken.token)
         sessionStorage.setItem('name', getToken.name)
         sessionStorage.setItem('admin', getToken.role)
@@ -39,7 +38,6 @@ loginForm.addEventListener('submit', async function(e){
 
 registerForm.addEventListener('submit', async function(e){
     e.preventDefault()
-    console.log("Oi")
     const payload = {
         name: document.getElementById('userName').value,
         login: document.getElementById('userLogin').value,
@@ -48,13 +46,8 @@ registerForm.addEventListener('submit', async function(e){
     }
     try{
         const requisition = await postUser(payload)
-        console.log(requisition)
-        alert("usuario " + requisition.login+ " cadastrado com sucesso")
-        document.getElementById('userName').value = ""
-        document.getElementById('userLogin').value = ""
-        document.getElementById('userPassword').value = ""
-        document.getElementById('userConfirmPassword').value = ""
-        
+        alert("usuario de login:" + requisition.login+ " e nome: " +requisition.name + " cadastrado com sucesso")
+        closeModalBtn.dispatchEvent(new Event('click'))
     }catch(e){
         let messageError = ""
         if(e.response.data.message == "Password and Confirmation don't match"){
@@ -78,6 +71,12 @@ registerForm.addEventListener('submit', async function(e){
         if(e.response.data.message == "Missing Param password confirmation"){
             messageError = "a confirmação de senha é obrigatória"
         }
+        const span = document.getElementById("registerError")
+        if(span.childNodes.length > 0){
+
+            span.removeChild(span.firstChild)
+        }
+        span.appendChild(document.createTextNode(messageError))
     }
     })
 
@@ -92,3 +91,15 @@ async function postUser (payload){
     return response.data
 }
 
+function clearForm(){
+    document.getElementById('userName').value = ""
+    document.getElementById('userLogin').value = ""
+    document.getElementById('userPassword').value = ""
+    document.getElementById('userConfirmPassword').value = ""
+    const span = document.getElementById("registerError")
+    if(span.childNodes.length > 0){
+        span.removeChild(span.firstChild)
+    }
+}
+
+modal.addEventListener('hidden.bs.modal', clearForm)
