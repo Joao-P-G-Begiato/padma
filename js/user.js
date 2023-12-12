@@ -2,13 +2,14 @@ const token = sessionStorage.getItem('token')
 const userName = sessionStorage.getItem('name')
 const isAdmin = sessionStorage.getItem('admin')
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', async function(){
     if(isAdmin == "false" || !isAdmin){
         window.open('../index.html', "_self")
     }
     if(!token){
         window.open('../index.html', "_self")
     }
+    await tableRender()
 })
 
 async function tableRender(){
@@ -16,9 +17,11 @@ async function tableRender(){
     const idName = "#userTable"
     const columns = [
         {
+            width: "50%",
             data: "name",
         },
         {
+            width: "10%",
             data: "role",
             render: function(data){
                 if(data){
@@ -28,9 +31,11 @@ async function tableRender(){
             }
         },
         {
-            data: "id"
+            data: "id",
+            class: "hidden"
         },
         {
+            
             render: function(){
                 return "Ação"
             }
@@ -44,4 +49,5 @@ async function getUsers(){
     const response = await axios.get("https://padma-auth.onrender.com/allusers")
     return response.data  
 }
+
 

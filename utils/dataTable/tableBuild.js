@@ -1,7 +1,7 @@
 function tableBuild(idName,data ,columns , printName){
-    document.getElementById(idName).dataTable().fnClearTable();
-    document.getElementById(idName).dataTable().fnDraw();
-    document.getElementById(idName).dataTable().fnDestroy();
+    $(idName).dataTable().fnClearTable();
+    $(idName).dataTable().fnDraw();
+    $(idName).dataTable().fnDestroy();
     let table;
     const setColumns = columns.map((element) => {
         if(!element.width){
@@ -11,6 +11,7 @@ function tableBuild(idName,data ,columns , printName){
         if(!element.class){
             element.class = "dt-center"
         }
+        return element
     })
     table = new DataTable(idName, {
         data,
@@ -21,24 +22,5 @@ function tableBuild(idName,data ,columns , printName){
             [10,25,50,100, 'Todos'],
         ],
         columns: setColumns,
-        buttons: [
-            {
-                extend: "excel",
-                title: printName + " " + moment(new Date()).format("DD/MM/YYYY"),
-                text: "Excel",
-                autoFilter: true,
-                sheetName: printName,
-            },
-            {
-                extend: "pdf",
-                title: printName + " " + moment(new Date()).format("DD/MM/YYYY"),
-                autoFilter: true,
-                sheetName: printName,
-            },
-            {
-                extend: "print",
-                title: printName + " " + moment(new Date()).format("DD/MM/YYYY")
-            }, 
-        ]
     })
 }
