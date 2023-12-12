@@ -31,18 +31,18 @@ async function tableRender(){
             }
         },
         {
+            width: "1%",
             data: "id",
             class: "hidden"
         },
         {
-            
-            render: function(){
-                return "Ação"
+            render: function(data, type, row){
+                console.log(row)
+                return `<img class='icon' onclick='changeAdmin(${JSON.stringify(row)})' title='privilégios de adm' src='../assets/adm.PNG'></i><img class='icon' onclick='exclude(${JSON.stringify(row.id)})' title='deletar usuário' src='../assets/trash.PNG'></i>`
             }
         }
     ]
     tableBuild(idName, data, columns, "Usuários")
-    console.log(data)
 }
 
 async function getUsers(){
@@ -50,4 +50,29 @@ async function getUsers(){
     return response.data  
 }
 
+function changeAdmin(user){
+    const oldRole = user.role == "true" ? "Administrador" : "Usuário" 
+    const newRole = user.role == "true" ? "Usuário" : "Administrador"
+    const msg = "Você quer mesmo trocar os privilégios de admnistrado do usuário: " + user.name + " de " + oldRole + " para " + newRole  
+    const confirmation = confirm(msg)
+    if(confirmation){
+        updateUser(user.id)
+    }
+}
 
+function exclude(id){
+    const confirmation = confirm("Gostaria de deletar o Usuário permanentemente?")
+    if(confirmation){
+        deleteUser(id)
+    }
+}
+
+function updateUser(id){
+    const url = "https://padma-auth.onrender.com/changeRole" + id
+    console.log(id)
+}
+
+function deleteUser(id){
+    const url = "https://padma-auth.onrender.com/" + id
+    console.log(id)
+}

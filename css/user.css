@@ -20,3 +20,12 @@ select {
 input{
     border: 1px white solid !important;
 }
+
+.icon{
+    width: 20px;
+    margin: 0 10px
+}
+
+.icon:hover{
+    cursor: pointer;
+}
