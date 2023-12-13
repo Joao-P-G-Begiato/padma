@@ -1,0 +1,31 @@
+.hidden{
+    display: none;
+}
+
+section{
+    margin: 20px 10px 10px 10px;
+    padding: 20px 10px 10px 10px;
+    border-radius: 10px;
+    background-color: rgb(105, 174, 206);
+}
+
+option{
+    background-color: rgb(105, 174, 206);
+}
+
+select {
+    border: 1px white solid !important;
+}
+
+input{
+    border: 1px white solid !important;
+}
+
+.icon{
+    width: 20px;
+    margin: 0 10px
+}
+
+.icon:hover{
+    cursor: pointer;
+}
