@@ -37,7 +37,6 @@ async function tableRender(){
         },
         {
             render: function(data, type, row){
-                console.log(row)
                 return `<img class='icon' onclick='changeAdmin(${JSON.stringify(row)})' title='privilégios de adm' src='../assets/adm.PNG'></i><img class='icon' onclick='exclude(${JSON.stringify(row.id)})' title='deletar usuário' src='../assets/trash.PNG'></i>`
             }
         }
@@ -50,29 +49,54 @@ async function getUsers(){
     return response.data  
 }
 
-function changeAdmin(user){
+async function changeAdmin(user){
     const oldRole = user.role == "true" ? "Administrador" : "Usuário" 
     const newRole = user.role == "true" ? "Usuário" : "Administrador"
     const msg = "Você quer mesmo trocar os privilégios de admnistrado do usuário: " + user.name + " de " + oldRole + " para " + newRole  
     const confirmation = confirm(msg)
     if(confirmation){
-        updateUser(user.id)
+        try{
+            await updateUser(user.id)
+            alert("troca de privilégio efetuada com sucesso")
+            window.location.reload()
+        }catch(e){
+            console.error(e)
+            if(e.response.data.message== "User not found!"){
+                alert("usuário não encontrado, gentileza recarregar a página e verificar se o usuário ainda existe")
+            }else{
+                alert("Alguma coisa deu errado, gentileza entrar em contato com o Admnistrador do sistema")
+            }
+        }
     }
 }
 
-function exclude(id){
+async function exclude(id){
     const confirmation = confirm("Gostaria de deletar o Usuário permanentemente?")
     if(confirmation){
-        deleteUser(id)
+        try{
+            await deleteUser(id)
+            alert("Usuário cancelado com sucesso")
+            window.location.reload()
+        }catch(e){
+
+            console.log(e.response.data.message)
+            if(e.response.data.message == "User not found!"){
+                alert("usuário não encontrado, gentileza recarregar a página e verificar se o usuário ainda existe")
+            }else{
+                alert("Alguma coisa deu errado, gentileza entrar em contato com o Admnistrador do sistema")
+            }
+        }
     }
 }
 
-function updateUser(id){
-    const url = "https://padma-auth.onrender.com/changeRole" + id
-    console.log(id)
+async function updateUser(id){
+    const url = "https://padma-auth.onrender.com/changeRole/" + id
+    const response = await axios.put(url)
+    return response.data
 }
 
-function deleteUser(id){
-    const url = "https://padma-auth.onrender.com/" + id
-    console.log(id)
+async function deleteUser(id){
+    const url = "https://padma-auth.onrender.com/deleteUser/" + id
+    const response = await axios.delete(url)
+    return response.data
 }
