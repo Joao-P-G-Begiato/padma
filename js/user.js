@@ -5,7 +5,7 @@ async function requestTokenValidation(){
         token,
     }
     console.log(payload)
-    const response = axios.get("https://padma-auth.onrender.com/verify", payload)
+    const response = axios.post("https://padma-auth.onrender.com/verify", payload)
     return response
 }
 // const userName = sessionStorage.getItem('name')
