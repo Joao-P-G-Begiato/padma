@@ -4,6 +4,7 @@ async function requestTokenValidation(){
     const payload = {
         token,
     }
+    console.log(payload)
     const response = axios.get("https://padma-auth.onrender.com/verify", payload)
     return response
 }
