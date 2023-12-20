@@ -1,6 +1,4 @@
 const token = sessionStorage.getItem('token')
-const verifiedToken = await requestTokenValidation()
-console.log(verifiedToken)
 
 async function requestTokenValidation(){
     const payload = {
@@ -13,6 +11,8 @@ async function requestTokenValidation(){
 // const isAdmin = sessionStorage.getItem('admin')
 
 document.addEventListener('DOMContentLoaded', async function(){
+    const verifiedToken = await requestTokenValidation()
+    console.log(verifiedToken)
     if(isAdmin == "false" || !isAdmin){
         window.open('../index.html', "_self")
     }
