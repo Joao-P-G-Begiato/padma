@@ -13,7 +13,7 @@ async function requestTokenValidation(){
 
 document.addEventListener('DOMContentLoaded', async function(){
     const verifiedToken = await requestTokenValidation()
-    console.log(verifiedToken)
+    const isAdmin = verifiedToken.role
     if(isAdmin == "false" || !isAdmin){
         window.open('../index.html', "_self")
     }
