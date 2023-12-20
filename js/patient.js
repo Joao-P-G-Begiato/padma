@@ -1,13 +1,18 @@
 const token = sessionStorage.getItem('token')
-const userName = sessionStorage.getItem('name')
-const isAdmin = sessionStorage.getItem('admin')
 
-document.addEventListener('DOMContentLoaded', function(){
-    if(isAdmin == "false" || !isAdmin){
-        console.log('oi')
-        document.getElementById('userManagment').remove()
+async function requestTokenValidation(){
+    const payload = {
+        token,
     }
-    if(!token){
+    const response = await axios.post("https://padma-auth.onrender.com/verify", payload)
+    return response
+}
+
+document.addEventListener('DOMContentLoaded', async function(){
+    try{
+        const verifiedToken = await requestTokenValidation()
+    }catch(e){
+        alert(e.response.data.message)
         window.open('../index.html', "_self")
     }
 })

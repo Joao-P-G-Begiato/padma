@@ -4,24 +4,26 @@ async function requestTokenValidation(){
     const payload = {
         token,
     }
-    console.log(payload)
-    const response = axios.post("https://padma-auth.onrender.com/verify", payload)
+    const response = await axios.post("https://padma-auth.onrender.com/verify", payload)
     return response
 }
-// const userName = sessionStorage.getItem('name')
-// const isAdmin = sessionStorage.getItem('admin')
 
 document.addEventListener('DOMContentLoaded', async function(){
-    const verifiedToken = await requestTokenValidation()
-    const isAdmin = verifiedToken.role
-    if(isAdmin == "false" || !isAdmin){
+    try{
+        const verifiedToken = await requestTokenValidation()
+        const isAdmin = verifiedToken.data.role
         console.log(isAdmin)
-        //window.open('../index.html', "_self")
-    }
-    if(!token){
+        if(isAdmin == "false" || !isAdmin){
+            window.open('../index.html', "_self")
+        }
+        if(!token){
+            window.open('../index.html', "_self")
+        }
+        await tableRender()
+    }catch(e){
+        alert(e.response.data.message)
         window.open('../index.html', "_self")
     }
-    await tableRender()
 })
 
 async function tableRender(){
