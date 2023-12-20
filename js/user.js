@@ -1,6 +1,16 @@
 const token = sessionStorage.getItem('token')
-const userName = sessionStorage.getItem('name')
-const isAdmin = sessionStorage.getItem('admin')
+const verifiedToken = await requestTokenValidation()
+console.log(verifiedToken)
+
+async function requestTokenValidation(){
+    const payload = {
+        token,
+    }
+    const response = axios.get("https://padma-auth.onrender.com/verify", payload)
+    return response
+}
+// const userName = sessionStorage.getItem('name')
+// const isAdmin = sessionStorage.getItem('admin')
 
 document.addEventListener('DOMContentLoaded', async function(){
     if(isAdmin == "false" || !isAdmin){
