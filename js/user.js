@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', async function(){
     const verifiedToken = await requestTokenValidation()
     const isAdmin = verifiedToken.role
     if(isAdmin == "false" || !isAdmin){
-        window.open('../index.html', "_self")
+        console.log(isAdmin)
+        //window.open('../index.html', "_self")
     }
     if(!token){
         window.open('../index.html', "_self")
