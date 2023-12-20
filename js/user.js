@@ -1,15 +1,29 @@
 const token = sessionStorage.getItem('token')
-const userName = sessionStorage.getItem('name')
-const isAdmin = sessionStorage.getItem('admin')
+
+async function requestTokenValidation(){
+    const payload = {
+        token,
+    }
+    const response = await axios.post("https://padma-auth.onrender.com/verify", payload)
+    return response
+}
 
 document.addEventListener('DOMContentLoaded', async function(){
-    if(isAdmin == "false" || !isAdmin){
+    try{
+        const verifiedToken = await requestTokenValidation()
+        const isAdmin = verifiedToken.data.role
+        console.log(isAdmin)
+        if(isAdmin == "false" || !isAdmin){
+            window.open('../index.html', "_self")
+        }
+        if(!token){
+            window.open('../index.html', "_self")
+        }
+        await tableRender()
+    }catch(e){
+        alert(e.response.data.message)
         window.open('../index.html', "_self")
     }
-    if(!token){
-        window.open('../index.html', "_self")
-    }
-    await tableRender()
 })
 
 async function tableRender(){
