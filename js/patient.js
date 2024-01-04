@@ -46,8 +46,12 @@ async function tableRender(){
             data: "completeData",
             width: "15%",
             render: function(data){
-                
-                return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>`
+                console.log(data)
+                return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>
+                <img src = "../assets/map.PNG" title='endereço do paciente' class = "icon" onclick = 'openAddress("${JSON.parse(data).patientId}")'>
+                <img src = "../assets/Anamnesis.PNG" title='Anamnese' class = "icon" onclick = '(${JSON.stringify(data)})'>
+                <img src = "../assets/Padma.PNG" title='Marcar Consulta' class = "icon" onclick = '(${JSON.stringify(data)})'>
+                `
             }
         }
     ]
@@ -107,3 +111,28 @@ $("#patientInfoModal").on("hidden.bs.modal", ()=>{
     document.getElementById("modalPatientContactPhone").removeChild(document.getElementById("modalPatientContactPhone").firstChild)
     document.getElementById("modalPatientContactRelation").removeChild(document.getElementById("modalPatientContactRelation").firstChild)
 })
+
+$("#patientAddressModal").on('hidden.bs.modal', ()=>{
+    const span = document.getElementById("addressSpan")
+    span.removeChild(span.firstChild)
+})
+
+async function openAddress(id){
+    const data = await getAddress(id)
+    console.log(data)
+    const span = document.getElementById("addressSpan")
+    let text
+    if(data[0].complement ===  "-"){
+        text = document.createTextNode(data[0].street + "," + data[0].number + " - "  + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+    }else{
+        text = document.createTextNode(data[0].street + "," + data[0].number + " - " + data[0].complement + " - " + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+    }
+    span.appendChild(text)
+    $("#patientAddressModal").modal('show')
+}
+
+async function getAddress(id){
+    const url = "https://padma-pl.onrender.com/address/"+id
+    const response = await axios.get(url)
+    return response.data
+}
