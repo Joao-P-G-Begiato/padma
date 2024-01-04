@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../utils//dataTable/datatables.min.css">
     <link rel="stylesheet" href="../css/default.css">
-    <link rel="stylesheet" href="../css/patient.css">
     <link rel="stylesheet" href="../css/mediaQuery.css">
+    <link rel="stylesheet" href="../css/patient.css">
     <title>Pacientes</title>
 </head>
 <body>
@@ -37,7 +39,62 @@
         </nav>
     </header>
     <main>
+        <button class="btn btn-success">Adicionar Paciente</button>
+        <section>
+            <table id="patientTable">
+                <thead>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Data de Nascimento</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
     </main>
+    <div class="modal" id="patientInfoModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dados do Usuário:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="divModalPatientInfo">
+                        <label>Nome:</label> <span id="modalPatientName"></span>
+                    </div>
+                    <div class="divModalPatientInfo">
+                        <label>CPF:</label> <span id="modalPatientCPF"></span>
+                    </div>
+                    <div class="divModalPatientInfo">
+                        <label>Data de Nascimento:</label> <span id="modalPatientBirthDate"></span>
+                    </div>
+                    <div class="divModalPatientInfo">
+                        <label>Telefone:</label> <span id="modalPatientPhone"></span>
+                    </div>
+                    <div class="divModalPatientInfo">
+                        <label>Celular:</label> <span id="modalPatientCellphone"></span>
+                    </div>
+                    <div class="divModalPatientInfo">
+                        <label>E-mail:</label> <span id="modalPatientEmail"></span>
+                    </div>
+                    <div class="divModalPatientInfo">
+                        <label>Ocupação:</label> <span id="modalPatientOccupation"></span>
+                    </div>
+                    <div class="divModalPatientInfo">
+                        <label>Contato:</label> 
+                        <span id="modalPatientContactName"></span>
+                        <label>-</label> <span id="modalPatientContactPhone"></span>
+                        <label>-</label> <span id="modalPatientContactRelation"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="bd-footer py-4 py-md-5 mt-5 ">
         <div class="container-fluid">
             <p class="navbar-brand">Produzido e desenvolvido por João Paulo G. Begiato</p>
@@ -45,6 +102,12 @@
     </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="../utils/dataTable/datatables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="../utils/moment/moment-with-locales.min.js"></script>
+<script src="../utils/moment/moment.js"></script>
+<script src="../utils/dataTable/tableBuild.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script type="module" src="../js/patient.js"></script>
+<script src="../js/patient.js"></script>
 </html>

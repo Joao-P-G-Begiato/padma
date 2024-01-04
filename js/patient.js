@@ -11,8 +11,99 @@ async function requestTokenValidation(){
 document.addEventListener('DOMContentLoaded', async function(){
     try{
         const verifiedToken = await requestTokenValidation()
+        if(verifiedToken.data){
+            await tableRender()
+        }
     }catch(e){
-        alert(e.response.data.message)
+        console.log(e)
+        if(e.response.data.message){
+            alert(e.response.data.message)
+        }
         window.open('../index.html', "_self")
     }
+})
+
+async function tableRender(){
+    const patientData = await getPatientData()
+    const columns = [
+        {
+            data: "name"
+            ,width: "25%"
+        }
+        ,{
+            data: "cpf"
+            ,width: "20%"
+        }
+        ,{
+            data: "phone"
+            ,width: "20%"
+        }
+        ,{
+            data: "birthDate"
+            ,width: "20%"
+        },
+        {
+            data: "completeData",
+            width: "15%",
+            render: function(data){
+                
+                return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>`
+            }
+        }
+    ]
+    tableBuild("#patientTable", patientData, columns)
+}
+
+async function getPatientData() {
+    const response = await axios.get("https://padma-pl.onrender.com/patient")
+    const revisedData = response.data.map((element => {
+        const result = {
+            name: element.name,
+            cpf: element.cpf,
+            phone: element.phone,
+            birthDate: element.birthDate,
+            completeData: JSON.stringify(element)
+        }
+        return result
+    }))
+    return revisedData
+}
+
+function openPacientInfo(data){
+    data = JSON.parse(data)
+    const nameTextNode = document.createTextNode(data.name)
+    const CPFTextNode = document.createTextNode(data.cpf)
+    const birthDateTextNode = document.createTextNode(data.birthDate)
+    const phoneTextNode = document.createTextNode(data.phone)
+    const cellphoneTextNode = document.createTextNode(data.cellphone)
+    const emailTextNode = document.createTextNode(data.email)
+    const occupationTextNode = document.createTextNode(data.occupation)
+    const contactNameTextNode = document.createTextNode(data.contactName)
+    const contactPhoneTextNode = document.createTextNode(data.contactPhone)
+    const ContactRelationTextNode = document.createTextNode(data.contactRelation)
+
+    document.getElementById("modalPatientName").appendChild(nameTextNode)
+    document.getElementById("modalPatientCPF").appendChild(CPFTextNode)
+    document.getElementById("modalPatientBirthDate").appendChild(birthDateTextNode)
+    document.getElementById("modalPatientPhone").appendChild(phoneTextNode)
+    document.getElementById("modalPatientCellphone").appendChild(cellphoneTextNode)
+    document.getElementById("modalPatientEmail").appendChild(emailTextNode)
+    document.getElementById("modalPatientOccupation").appendChild(occupationTextNode)
+    document.getElementById("modalPatientContactName").appendChild(contactNameTextNode)
+    document.getElementById("modalPatientContactPhone").appendChild(contactPhoneTextNode)
+    document.getElementById("modalPatientContactRelation").appendChild(ContactRelationTextNode)
+    $("#patientInfoModal").modal("show")
+}
+
+$("#patientInfoModal").on("hidden.bs.modal", ()=>{
+    document.getElementById("modalPatientName").removeChild(document.getElementById("modalPatientName").firstChild)
+    document.getElementById("modalPatientCPF").removeChild(document.getElementById("modalPatientCPF").firstChild)
+    document.getElementById("modalPatientBirthDate").removeChild(document.getElementById("modalPatientBirthDate").firstChild)
+    document.getElementById("modalPatientPhone").removeChild(document.getElementById("modalPatientPhone").firstChild)
+    document.getElementById("modalPatientCellphone").removeChild(document.getElementById("modalPatientCellphone").firstChild)
+    document.getElementById("modalPatientEmail").removeChild(document.getElementById("modalPatientEmail").firstChild)
+    document.getElementById("modalPatientOccupation").removeChild(document.getElementById("modalPatientOccupation").firstChild)
+    document.getElementById("modalPatientContactName").removeChild(document.getElementById("modalPatientContactName").firstChild)
+    document.getElementById("modalPatientContactPhone").removeChild(document.getElementById("modalPatientContactPhone").firstChild)
+    document.getElementById("modalPatientContactRelation").removeChild(document.getElementById("modalPatientContactRelation").firstChild)
 })
