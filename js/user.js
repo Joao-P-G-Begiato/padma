@@ -51,11 +51,11 @@ async function tableRender(){
         },
         {
             render: function(data, type, row){
-                return `<img class='icon' onclick='changeAdmin(${JSON.stringify(row)})' title='privilégios de adm' src='../assets/adm.PNG'></i><img class='icon' onclick='exclude(${JSON.stringify(row.id)})' title='deletar usuário' src='../assets/trash.PNG'></i>`
+                return `<img class='icon' onclick='changeAdmin(${JSON.stringify(row)})' title='privilégios de adm' src='../assets/adm.PNG'><img class='icon' onclick='exclude(${JSON.stringify(row.id)})' title='deletar usuário' src='../assets/trash.PNG'>`
             }
         }
     ]
-    tableBuild(idName, data, columns, "Usuários")
+    tableBuild(idName, data, columns)
 }
 
 async function getUsers(){
