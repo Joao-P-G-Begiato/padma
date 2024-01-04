@@ -1,4 +1,4 @@
-function tableBuild(idName,data ,columns , printName){
+function tableBuild(idName,data ,columns ){
     $(idName).dataTable().fnClearTable();
     $(idName).dataTable().fnDraw();
     $(idName).dataTable().fnDestroy();
@@ -6,7 +6,7 @@ function tableBuild(idName,data ,columns , printName){
     const setColumns = columns.map((element) => {
         if(!element.width){
             const width = Math.floor(100/columns.length)
-            element.width = width
+            element.width = width + "%"
         }
         if(!element.class){
             element.class = "dt-center"
