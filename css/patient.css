@@ -37,3 +37,18 @@ label{
 .modal-body{
     background-color: rgb(126,195,220);
 }
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px
+}
+
+section{
+    width: 100%;
+}
+
+.dataTable{
+    width: 100% !important
+}
