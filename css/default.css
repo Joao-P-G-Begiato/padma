@@ -4,7 +4,7 @@ nav{
 }
 
 body{
-    background-color: #C3DC7E;
+    background-color: rgb(195, 220, 126);
     color: white;
     display: flex;
     flex-direction: column;
