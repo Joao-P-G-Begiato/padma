@@ -2,11 +2,11 @@ section{
     margin: 20px 10px 10px 10px;
     padding: 20px 10px 10px 10px;
     border-radius: 10px;
-    background-color: rgb(105, 174, 206);
+    background-color:  rgb(174, 206, 105);
 }
 
 option{
-    background-color: rgb(105, 174, 206);
+    background-color:  rgb(174, 206, 105);
 }
 
 select {
@@ -31,11 +31,11 @@ label{
 }
 
 .modal-header, .modal-footer{
-    background-color: rgb(105, 174, 206);
+    background-color:  rgb(174, 206, 105);
 }
 
 .modal-body{
-    background-color: rgb(126,195,220);
+  background-color: rgb(195, 220, 126);
 }
 
 main{
