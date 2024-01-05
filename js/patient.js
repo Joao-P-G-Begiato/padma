@@ -49,8 +49,8 @@ async function tableRender(){
                 console.log(data)
                 return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>
                 <img src = "../assets/map.PNG" title='endereço do paciente' class = "icon" onclick = 'openAddress("${JSON.parse(data).patientId}")'>
-                <img src = "../assets/Anamnesis.PNG" title='Anamnese' class = "icon" onclick = '(${JSON.stringify(data)})'>
-                <img src = "../assets/Padma.PNG" title='Marcar Consulta' class = "icon" onclick = '(${JSON.stringify(data)})'>
+                <img src = "../assets/Anamnesis.PNG" title='Anamnese' class = "icon" onclick = 'notImplemented(${JSON.stringify(data)})'>
+                <img src = "../assets/Padma.PNG" title='Marcar Consulta' class = "icon" onclick = 'notImplemented(${JSON.stringify(data)})'>
                 `
             }
         }
@@ -135,4 +135,67 @@ async function getAddress(id){
     const url = "https://padma-pl.onrender.com/address/"+id
     const response = await axios.get(url)
     return response.data
+}
+
+function notImplemented(){
+    alert("Função ainda não implementada")
+}
+
+function addPatientBtn(){
+    //alert("abrir adicionar paciente")
+    $("#newPatientRegister").modal('show')
+}
+
+$("#newPatientRegister").on("hidden.bs.modal", ()=>{
+    clearRegisterFields()
+})
+
+function clearRegisterFields(){
+    document.getElementById("newPatient-name").value = ""
+    document.getElementById("newPatient-phone").value = ""
+    document.getElementById("newPatient-birthDate").value = ""
+    document.getElementById("newPatient-occupation").value = ""
+    document.getElementById("newPatient-email").value = ""
+    document.getElementById("newPatient-cellphone").value = ""
+    document.getElementById("newPatient-cpf").value = ""
+    document.getElementById("newPatient-contactName").value = ""
+    document.getElementById("newPatient-contactPhone").value = ""
+    document.getElementById("newPatient-contactRelation").value = ""
+}
+
+const form = document.getElementById("registerPatientForm")
+form.addEventListener('submit', async (e)=>{
+    e.preventDefault()
+    const payload = {
+        name : document.getElementById("newPatient-name").value ,
+        phone : document.getElementById("newPatient-phone").value ,
+        birthDate: document.getElementById("newPatient-birthDate").value ,
+        occupation: document.getElementById("newPatient-occupation").value ,
+        email: document.getElementById("newPatient-email").value,
+        cellphone: document.getElementById("newPatient-cellphone").value ,
+        cpf: document.getElementById("newPatient-cpf").value.includes(".") ? document.getElementById("newPatient-cpf").value.split(".").join("").split("-").join("") : document.getElementById("newPatient-cpf").value ,
+        contactName: document.getElementById("newPatient-contactName").value ,
+        contactPhone: document.getElementById("newPatient-contactPhone").value ,
+        contactRelation: document.getElementById("newPatient-contactRelation").value 
+    }
+    try{
+        const post = await postPatient(payload)
+        alert(`Paciente ${payload.name} cadastrado com sucesso !`)
+        $("#newPatientRegister").modal('hide')
+        tableRender()
+
+    }catch(e){
+        console.log(e)
+        if(e.response.data.message){
+            alert(e.response.data.message)
+        }else{
+            alert("error: "+ e.message+ " contate o administrador do sistema.")
+        }
+    }
+})
+
+async function postPatient(payload){
+    const url = "https://padma-pl.onrender.com/patient"
+    const response = await axios.post(url, payload)
+    return response
 }

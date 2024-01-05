@@ -39,7 +39,6 @@
         </nav>
     </header>
     <main>
-        <button class="btn btn-success">Adicionar Paciente</button>
         <section>
             <table id="patientTable">
                 <thead>
@@ -52,6 +51,7 @@
                 <tbody></tbody>
             </table>
         </section>
+        <button class="btn btn-success" onclick="addPatientBtn()">Adicionar Paciente</button>
     </main>
     <div class="modal" id="patientInfoModal" tabindex="-1">
         <div class="modal-dialog">
@@ -111,6 +111,66 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="newPatientRegister" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastro do Paciente:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerPatientForm" class="formPatient">
+                        <div class="divRegisterPatient">
+                            <label>Nome:</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-name">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>Telefone</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-phone">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>Data de Aniversário</label>
+                            <input required class="inputRegisterPatient" type="date" id="newPatient-birthDate">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>Ocupação</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-occupation">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>E-mail</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-email">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>Celular</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-cellphone">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>CPF</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-cpf">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>Nome do Contato</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-contactName">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>Telefone do Contato</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-contactPhone">
+                        </div>
+                        <div class="divRegisterPatient">
+                            <label>Relação:</label>
+                            <input required class="inputRegisterPatient" type="text" id="newPatient-contactRelation">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-register">Cadastrar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <footer class="bd-footer py-4 py-md-5 mt-5 ">
         <div class="container-fluid">
             <p class="navbar-brand">Produzido e desenvolvido por João Paulo G. Begiato</p>
