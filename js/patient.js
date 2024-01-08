@@ -10,11 +10,15 @@ async function requestTokenValidation(){
 
 document.addEventListener('DOMContentLoaded', async function(){
     try{
+        const loadingDiv = document.getElementById("loadingDiv")
         const verifiedToken = await requestTokenValidation()
         if(verifiedToken.data){
             await tableRender()
+            loadingDiv.setAttribute("class", "hide")
         }
     }catch(e){
+        const loadingDiv = document.getElementById("loadingDiv")
+        loadingDiv.setAttribute("class", "hide")
         console.log(e)
         if(e.response.data.message){
             alert(e.response.data.message)

@@ -9,6 +9,7 @@ async function requestTokenValidation(){
 }
 
 document.addEventListener('DOMContentLoaded', async function(){
+    const loadingDiv = document.getElementById("loadingDiv")
     try{
         const verifiedToken = await requestTokenValidation()
         const isAdmin = verifiedToken.data.role
@@ -20,7 +21,9 @@ document.addEventListener('DOMContentLoaded', async function(){
             window.open('../index.html', "_self")
         }
         await tableRender()
+        loadingDiv.setAttribute('class', 'hide')
     }catch(e){
+        loadingDiv.setAttribute('class', 'hide')
         alert(e.response.data.message)
         window.open('../index.html', "_self")
     }
