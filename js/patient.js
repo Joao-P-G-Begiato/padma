@@ -28,25 +28,20 @@ async function tableRender(){
     const columns = [
         {
             data: "name"
-            ,width: "25%"
+            ,width: "30%"
         }
         ,{
             data: "cpf"
-            ,width: "20%"
-        }
-        ,{
-            data: "phone"
-            ,width: "20%"
+            ,width: "25%"
         }
         ,{
             data: "birthDate"
-            ,width: "20%"
+            ,width: "25%"
         },
         {
             data: "completeData",
-            width: "15%",
+            width: "20%",
             render: function(data){
-                console.log(data)
                 return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>
                 <img src = "../assets/map.PNG" title='endereço do paciente' class = "icon" onclick = 'openAddress("${JSON.parse(data).patientId}")'>
                 <img src = "../assets/Anamnesis.PNG" title='Anamnese' class = "icon" onclick = 'notImplemented(${JSON.stringify(data)})'>
