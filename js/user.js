@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', async function(){
     try{
         const verifiedToken = await requestTokenValidation()
         const isAdmin = verifiedToken.data.role
-        console.log(isAdmin)
         if(isAdmin == "false" || !isAdmin){
             window.open('../index.html', "_self")
         }
@@ -67,15 +66,21 @@ async function getUsers(){
 }
 
 async function changeAdmin(user){
-    const oldRole = user.role == "true" ? "Administrador" : "Usuário" 
-    const newRole = user.role == "true" ? "Usuário" : "Administrador"
+    console.log(user.role == true)
+    const oldRole = user.role == true ? "Administrador" : "Usuário" 
+    console.log(oldRole)
+    const newRole = user.role == true ? "Usuário" : "Administrador"
     const msg = "Você quer mesmo trocar os privilégios de admnistrado do usuário: " + user.name + " de " + oldRole + " para " + newRole  
     const confirmation = confirm(msg)
     if(confirmation){
+        const loadingDiv = document.getElementById("loadingDiv")
         try{
+            loadingDiv.setAttribute('class', 'loadingContainer')
             await updateUser(user.id)
             alert("troca de privilégio efetuada com sucesso")
-            window.location.reload()
+            await tableRender()
+            loadingDiv.setAttribute('class', 'hide')
+            //window.location.reload()
         }catch(e){
             console.error(e)
             if(e.response.data.message== "User not found!"){
