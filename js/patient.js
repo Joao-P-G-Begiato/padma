@@ -118,16 +118,23 @@ $("#patientAddressModal").on('hidden.bs.modal', ()=>{
 
 async function openAddress(id){
     const data = await getAddress(id)
-    console.log(data)
-    const span = document.getElementById("addressSpan")
-    let text
-    if(data[0].complement ===  "-"){
-        text = document.createTextNode(data[0].street + "," + data[0].number + " - "  + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+    if(data != ''){
+        console.log(data)
+        const span = document.getElementById("addressSpan")
+        let text
+        if(data[0].complement ===  "-"){
+            text = document.createTextNode(data[0].street + "," + data[0].number + " - "  + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+        }else{
+            text = document.createTextNode(data[0].street + "," + data[0].number + " - " + data[0].complement + " - " + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+        }
+        span.appendChild(text)
+        $("#patientAddressModal").modal('show')
     }else{
-        text = document.createTextNode(data[0].street + "," + data[0].number + " - " + data[0].complement + " - " + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+        if(confirm("Paciente sem endereço cadastrado, gostaria de realizar o cadastro?") == true){
+            sessionStorage.setItem('patientId' , id)
+            window.open("../pages/addressRegistration.html", "_self")
+        }
     }
-    span.appendChild(text)
-    $("#patientAddressModal").modal('show')
 }
 
 async function getAddress(id){
