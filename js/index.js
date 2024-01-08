@@ -8,12 +8,17 @@ loginForm.addEventListener('submit', async function(e){
     e.preventDefault()
     const login = document.getElementById("login-input").value
     const password = document.getElementById("password-input").value
+    const loadingDiv = document.createElement("div")
+    const loginForm = document.getElementById("login-form")
+    loadingDiv.setAttribute("class", "loadingDiv")
+    loginForm.appendChild(loadingDiv)
     const url = "https://padma-auth.onrender.com/auth/" + login +"?password=" + password
     try{
         const getToken = await getAuth(url)
         sessionStorage.setItem('token', getToken.token)
         window.open("../pages/home.html", "_self")
     }catch(e){
+        loginForm.removeChild(loginForm.lastChild)
         const main = document.getElementsByTagName("main")
         const section = document.getElementsByTagName("section")[0]
         if(section){
