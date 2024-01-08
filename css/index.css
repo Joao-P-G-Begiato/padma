@@ -48,6 +48,11 @@ footer{
     color: #83935B
 }
 
+input:disabled{
+    background-color: #c3dc7e3d;;
+    color: lightgray
+}
+
 span {
     color: red
 }
