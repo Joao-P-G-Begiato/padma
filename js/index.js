@@ -3,7 +3,6 @@ const registerForm = document.getElementById('registerUserForm')
 const closeModalBtn = document.getElementsByClassName('btn-close')[0]
 const modal = document.getElementById('registerFormModal')
 
-
 loginForm.addEventListener('submit', async function(e){
     e.preventDefault()
     const login = document.getElementById("login-input").value
@@ -12,8 +11,7 @@ loginForm.addEventListener('submit', async function(e){
     const loginForm = document.getElementById("login-form")
     loadingDiv.setAttribute("class", "loadingDiv")
     loginForm.appendChild(loadingDiv)
-    document.getElementById("login-input").disabled = true
-    document.getElementById("password-input").disabled = true
+    disableInput(true)
     const url = "https://padma-auth.onrender.com/auth/" + login +"?password=" + password
     try{
         const getToken = await getAuth(url)
@@ -21,8 +19,7 @@ loginForm.addEventListener('submit', async function(e){
         window.open("../pages/home.html", "_self")
     }catch(e){
         loginForm.removeChild(loginForm.lastChild)
-        document.getElementById("login-input").disabled = false
-        document.getElementById("password-input").disabled = false
+        disableInput(false)
         const main = document.getElementsByTagName("main")
         const section = document.getElementsByTagName("section")[0]
         if(section){
@@ -123,4 +120,11 @@ async function generateTestUser(){
         await postUser(dinamicPayload)
     }
     console.log("criados")
+}
+
+
+function disableInput (boolean){
+    document.getElementById("login-input").disabled = boolean
+    document.getElementById("password-input").disabled = boolean
+    document.getElementById("submitBtn").disabled = boolean
 }
