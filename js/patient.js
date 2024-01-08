@@ -1,4 +1,5 @@
 const token = sessionStorage.getItem('token')
+const editPatientInfoBtn = document.getElementById("editPatientBtn")
 
 async function requestTokenValidation(){
     const payload = {
@@ -84,7 +85,6 @@ function openPacientInfo(data){
     const contactNameTextNode = document.createTextNode(data.contactName)
     const contactPhoneTextNode = document.createTextNode(data.contactPhone)
     const ContactRelationTextNode = document.createTextNode(data.contactRelation)
-
     document.getElementById("modalPatientName").appendChild(nameTextNode)
     document.getElementById("modalPatientCPF").appendChild(CPFTextNode)
     document.getElementById("modalPatientBirthDate").appendChild(birthDateTextNode)
@@ -95,6 +95,7 @@ function openPacientInfo(data){
     document.getElementById("modalPatientContactName").appendChild(contactNameTextNode)
     document.getElementById("modalPatientContactPhone").appendChild(contactPhoneTextNode)
     document.getElementById("modalPatientContactRelation").appendChild(ContactRelationTextNode)
+    sessionStorage.setItem("patientInfo", JSON.stringify(data))
     $("#patientInfoModal").modal("show")
 }
 
@@ -109,6 +110,7 @@ $("#patientInfoModal").on("hidden.bs.modal", ()=>{
     document.getElementById("modalPatientContactName").removeChild(document.getElementById("modalPatientContactName").firstChild)
     document.getElementById("modalPatientContactPhone").removeChild(document.getElementById("modalPatientContactPhone").firstChild)
     document.getElementById("modalPatientContactRelation").removeChild(document.getElementById("modalPatientContactRelation").firstChild)
+    sessionStorage.removeItem("patientInfo")
 })
 
 $("#patientAddressModal").on('hidden.bs.modal', ()=>{
@@ -205,3 +207,7 @@ async function postPatient(payload){
     const response = await axios.post(url, payload)
     return response
 }
+
+editPatientInfoBtn.addEventListener('click', ()=>{
+    window.open("../pages/editPatientInfo.html", "_self")
+})
