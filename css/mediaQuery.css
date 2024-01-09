@@ -27,9 +27,8 @@
         font-size: xx-small;
     }
 
-    .form-control , .input-group-text , .btn{
+    div, a, label, select, .form-control , .input-group-text , .btn{
         font-size: 14px;
-        min-height: 24px;
     }
     
 
@@ -56,7 +55,7 @@
         font-size: xx-small;
     }
 
-    .form-control , .input-group-text , .btn{
+    div, a, label, select, .form-control , .input-group-text , .btn{
         font-size: 12px;
     }
 
@@ -75,7 +74,7 @@
     .navbar-brand{
         font-size: 10px !important;
     }
-    .form-control , .input-group-text , .btn{
+    div, a, label, select, .form-control , .input-group-text , .btn{
         font-size: 10px;
     }
     p, input{
