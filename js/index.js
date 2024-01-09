@@ -108,21 +108,6 @@ function clearForm(){
 
 modal.addEventListener('hidden.bs.modal', clearForm)
 
-
-async function generateTestUser(){
-    for(let i = 0; i < 10; i++){
-        const dinamicPayload = {
-            name : "Teste JP",
-            login : "jpbetest" + i,
-            password : "Dudaema@3005",
-            confirmPassword: "Dudaema@3005"
-        }
-        await postUser(dinamicPayload)
-    }
-    console.log("criados")
-}
-
-
 function disableInput (boolean){
     document.getElementById("login-input").disabled = boolean
     document.getElementById("password-input").disabled = boolean

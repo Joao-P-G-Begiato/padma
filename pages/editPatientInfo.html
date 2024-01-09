@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="../utils//dataTable/datatables.min.css">
+        <link rel="stylesheet" href="../css/default.css">
+        <link rel="stylesheet" href="../css/patientInfo.css">
+        <link rel="stylesheet" href="../css/mediaQuery.css">
+
+        <title>Gerenciamento de Usuários</title>
+    </head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="./home.html">Padma Health and Care - Schedule Control System</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="./home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="./schedule.html">Agenda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link activeLink" href="./patient.html">Pacientes</a>
+                        </li>
+                        <li class="nav-item" id="userManagment">
+                            <a class="nav-link " href="./user.html">Usuários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="logout">
+                                <img class="icon" src="../assets/logout.PNG">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="loadingDiv" class="hide">
+            <div class="loadingDiv">
+            </div>
+        </div>
+        <section class="dualFormSection">
+            <form id="registerPatientForm" class="formPatient">
+                <h3>Informações de Pessoais</h3><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="patientAllCheckBox">
+                    </div>
+                    <input class="form-control" value="Selecionar Todos" type="text" id="addressAll" disabled>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="nameCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-name" class="input-group-text">Nome:</label>
+                    <input  class="form-control" type="text" id="newPatient-name">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="phoneCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-phone" class="input-group-text">Telefone</label>
+                    <input  class="form-control" type="text" id="newPatient-phone">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="birthDayCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-birthDate" class="input-group-text">Data de Nascimento</label>
+                    <input  class="form-control" type="date" id="newPatient-birthDate">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="occupationCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-occupation" class="input-group-text">Ocupação</label>
+                    <input  class="form-control" type="text" id="newPatient-occupation">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="emailCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-email" class="input-group-text">E-mail</label>
+                    <input  class="form-control" type="text" id="newPatient-email">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="cellphoneCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-cellphone" class="input-group-text">Celular</label>
+                    <input  class="form-control" type="text" id="newPatient-cellphone">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="cpfCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-cpf" class="input-group-text">CPF</label>
+                    <input  class="form-control" type="text" id="newPatient-cpf">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="contactCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-contactName" class="input-group-text">Nome do Contato</label>
+                    <input  class="form-control" type="text" id="newPatient-contactName">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="contactPhoneCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-contactPhone" class="input-group-text">Telefone do Contato</label>
+                    <input  class="form-control" type="text" id="newPatient-contactPhone">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="contactRelationCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-contactRelation" class="input-group-text">Relação:</label>
+                    <input  class="form-control" type="text" id="newPatient-contactRelation">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success btn-register">Alterar Informações Pessoais</button>
+            </form>
+
+            <form class="addressRegistrationForm" id="addressRegistrationForm">
+                <h3>Informações de Endereço</h3><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressAllCheckBox">
+                    </div>
+                    <input class="form-control" value="Selecionar Todos" type="text" id="addressAll" disabled>
+                </div><br>
+                <div>
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <input type="checkbox" class="form-check-input" id="addressZipcodeCheckBox">
+                        </div>
+                        <label class="input-group-text">CEP</label>
+                        <input class="form-control" type="text" id="addressZipcode" aria-describedby="cepSearch" required><br>
+                        <span class="input-group-text">
+                            <img src="../assets/Magnifying .PNG" id="cepSearch" title="Buscar cep" class="icon">
+                        </span>
+                    </div>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressStreetCheckBox">
+                    </div>
+                    <label class="input-group-text">Logradouro:</label><br>
+                    <input class="form-control" type="text" id="addressStreet" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressNumberCheckBox">
+                    </div>
+                    <label class="input-group-text">Número:</label><br>
+                    <input class="form-control" type="text" id="addressNumber" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressComplementCheckBox">
+                    </div>
+                    <label class="input-group-text">Complemento:</label><br>
+                    <input class="form-control" type="text" id="addressComplement" >
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressDistrictCheckBox">
+                    </div>
+                    <label class="input-group-text">Bairro:</label><br>
+                    <input class="form-control" type="text" id="addressDistrict" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressCityCheckBox">
+                    </div>
+                    <label class="input-group-text">Cidade:</label><br>
+                    <input class="form-control" type="text" id="addressCity" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressUfCheckBox">
+                    </div>
+                    <label class="input-group-text">Estado:</label><br>
+                    <input class="form-control" type="text" id="addressUf" required>
+                </div><br><br>
+                <button class="btn btn-success" type="submit">Alterar Endereço</button>
+            </form>
+        </section>
+        <section class="sectionSpan">
+            <span><br>Selecione apenas os campos que quer alterar , os formulários de endereço e informações pessoais são independentes um do outro </span>
+        </section>
+    </main>
+    <footer class="bd-footer py-4 py-md-5 mt-5 ">
+        <div class="container-fluid">
+            <p class="navbar-brand">Produzido e desenvolvido por João Paulo G. Begiato</p>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="../utils/dataTable/datatables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="../utils/moment/moment-with-locales.min.js"></script>
+<script src="../utils/moment/moment.js"></script>
+<script src="../utils/dataTable/tableBuild.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="../js/default.js"></script>
+<script src="../js/patientInfo.js"></script>
+</html>

@@ -1,10 +1,37 @@
+@media  (max-width: 800px){
+    .dualFormSection{
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn{
+        margin-bottom: 10px;
+    }
+    .form-control , .input-group-text , .btn{
+        font-size: 14px;
+        min-height: 24px;
+    }
+    footer{
+        position: relative;
+    }
+    span{
+        text-align: center;
+    }
+}
+
 @media  (max-width: 550px) {
-    .navbar-brand{
+    .navbar-brand , h3{
         font-size: medium !important;
     }
-    p{
+
+    p, input{
         font-size: xx-small;
     }
+
+    div, a, label, select, .form-control , .input-group-text , .btn{
+        font-size: 14px;
+    }
+    
+
 
     td , th{
         font-size: 12px;
@@ -24,9 +51,14 @@
     .navbar-brand{
         font-size: 12px !important;
     }
-    p{
+    p, input{
         font-size: xx-small;
     }
+
+    div, a, label, select, .form-control , .input-group-text , .btn{
+        font-size: 12px;
+    }
+
 
     td , th{
         font-size: 10px;
@@ -42,7 +74,10 @@
     .navbar-brand{
         font-size: 10px !important;
     }
-    p{
+    div, a, label, select, .form-control , .input-group-text , .btn{
+        font-size: 10px;
+    }
+    p, input{
         font-size: xx-small;
     }
 

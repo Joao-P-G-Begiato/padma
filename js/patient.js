@@ -1,4 +1,6 @@
 const token = sessionStorage.getItem('token')
+const editPatientInfoBtn = document.getElementById("editPatientBtn")
+const editPatientAddresBtn = document.getElementById("editAddresBtn")
 
 async function requestTokenValidation(){
     const payload = {
@@ -84,7 +86,6 @@ function openPacientInfo(data){
     const contactNameTextNode = document.createTextNode(data.contactName)
     const contactPhoneTextNode = document.createTextNode(data.contactPhone)
     const ContactRelationTextNode = document.createTextNode(data.contactRelation)
-
     document.getElementById("modalPatientName").appendChild(nameTextNode)
     document.getElementById("modalPatientCPF").appendChild(CPFTextNode)
     document.getElementById("modalPatientBirthDate").appendChild(birthDateTextNode)
@@ -95,6 +96,7 @@ function openPacientInfo(data){
     document.getElementById("modalPatientContactName").appendChild(contactNameTextNode)
     document.getElementById("modalPatientContactPhone").appendChild(contactPhoneTextNode)
     document.getElementById("modalPatientContactRelation").appendChild(ContactRelationTextNode)
+    sessionStorage.setItem("patientInfo", JSON.stringify(data))
     $("#patientInfoModal").modal("show")
 }
 
@@ -109,6 +111,7 @@ $("#patientInfoModal").on("hidden.bs.modal", ()=>{
     document.getElementById("modalPatientContactName").removeChild(document.getElementById("modalPatientContactName").firstChild)
     document.getElementById("modalPatientContactPhone").removeChild(document.getElementById("modalPatientContactPhone").firstChild)
     document.getElementById("modalPatientContactRelation").removeChild(document.getElementById("modalPatientContactRelation").firstChild)
+    sessionStorage.removeItem("patientInfo")
 })
 
 $("#patientAddressModal").on('hidden.bs.modal', ()=>{
@@ -118,16 +121,23 @@ $("#patientAddressModal").on('hidden.bs.modal', ()=>{
 
 async function openAddress(id){
     const data = await getAddress(id)
-    console.log(data)
-    const span = document.getElementById("addressSpan")
-    let text
-    if(data[0].complement ===  "-"){
-        text = document.createTextNode(data[0].street + "," + data[0].number + " - "  + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+    if(data != ''){
+        console.log(data)
+        const span = document.getElementById("addressSpan")
+        let text
+        if(data[0].complement ===  "-"){
+            text = document.createTextNode(data[0].street + "," + data[0].number + " - "  + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+        }else{
+            text = document.createTextNode(data[0].street + "," + data[0].number + " - " + data[0].complement + " - " + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+        }
+        span.appendChild(text)
+        $("#patientAddressModal").modal('show')
     }else{
-        text = document.createTextNode(data[0].street + "," + data[0].number + " - " + data[0].complement + " - " + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
+        if(confirm("Paciente sem endereço cadastrado, gostaria de realizar o cadastro?") == true){
+            sessionStorage.setItem('patientId' , id)
+            window.open("../pages/addressRegistration.html", "_self")
+        }
     }
-    span.appendChild(text)
-    $("#patientAddressModal").modal('show')
 }
 
 async function getAddress(id){
@@ -198,3 +208,11 @@ async function postPatient(payload){
     const response = await axios.post(url, payload)
     return response
 }
+
+editPatientInfoBtn.addEventListener('click', ()=>{
+    window.open("../pages/editPatientInfo.html", "_self")
+})
+
+editPatientAddresBtn.addEventListener('click', ()=>{
+    window.open("../pages/editPatientInfo.html", "_self")
+})
