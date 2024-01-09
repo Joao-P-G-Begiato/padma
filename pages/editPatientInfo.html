@@ -28,10 +28,10 @@
                             <a class="nav-link " href="./schedule.html">Agenda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./patient.html">Pacientes</a>
+                            <a class="nav-link activeLink" href="./patient.html">Pacientes</a>
                         </li>
                         <li class="nav-item" id="userManagment">
-                            <a class="nav-link activeLink" href="./user.html">Usuários</a>
+                            <a class="nav-link " href="./user.html">Usuários</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="logout">
@@ -51,118 +51,154 @@
         </div>
         <section class="dualFormSection">
             <form id="registerPatientForm" class="formPatient">
-                <h3>Informações de Pessoais</h3>
+                <h3>Informações de Pessoais</h3><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input type="checkbox" class="form-check-input" id="patientAllCheckBox">
                     </div>
-                    <label class="input-group-text">Nome:</label>
-                    <input required class="form-control" type="text" id="newPatient-name">
+                    <input class="form-control" value="Selecionar Todos" type="text" id="addressAll" disabled>
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="nameCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">Telefone</label>
-                    <input required class="form-control" type="text" id="newPatient-phone">
+                    <label for="newPatient-name" class="input-group-text">Nome:</label>
+                    <input  class="form-control" type="text" id="newPatient-name">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="phoneCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">Data de Nascimento</label>
-                    <input required class="form-control" type="date" id="newPatient-birthDate">
+                    <label for="newPatient-phone" class="input-group-text">Telefone</label>
+                    <input  class="form-control" type="text" id="newPatient-phone">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="birthDayCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">Ocupação</label>
-                    <input required class="form-control" type="text" id="newPatient-occupation">
+                    <label for="newPatient-birthDate" class="input-group-text">Data de Nascimento</label>
+                    <input  class="form-control" type="date" id="newPatient-birthDate">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="occupationCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">E-mail</label>
-                    <input required class="form-control" type="text" id="newPatient-email">
+                    <label for="newPatient-occupation" class="input-group-text">Ocupação</label>
+                    <input  class="form-control" type="text" id="newPatient-occupation">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="emailCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">Celular</label>
-                    <input required class="form-control" type="text" id="newPatient-cellphone">
+                    <label for="newPatient-email" class="input-group-text">E-mail</label>
+                    <input  class="form-control" type="text" id="newPatient-email">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="cellphoneCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">CPF</label>
-                    <input required class="form-control" type="text" id="newPatient-cpf">
+                    <label for="newPatient-cellphone" class="input-group-text">Celular</label>
+                    <input  class="form-control" type="text" id="newPatient-cellphone">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="cpfCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">Nome do Contato</label>
-                    <input required class="form-control" type="text" id="newPatient-contactName">
+                    <label for="newPatient-cpf" class="input-group-text">CPF</label>
+                    <input  class="form-control" type="text" id="newPatient-cpf">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="contactCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">Telefone do Contato</label>
-                    <input required class="form-control" type="text" id="newPatient-contactPhone">
+                    <label for="newPatient-contactName" class="input-group-text">Nome do Contato</label>
+                    <input  class="form-control" type="text" id="newPatient-contactName">
                 </div><br>
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox">
+                        <input id="contactPhoneCheckBox" class="form-check-input" type="checkbox">
                     </div>
-                    <label class="input-group-text">Relação:</label>
-                    <input required class="form-control" type="text" id="newPatient-contactRelation">
+                    <label for="newPatient-contactPhone" class="input-group-text">Telefone do Contato</label>
+                    <input  class="form-control" type="text" id="newPatient-contactPhone">
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input id="contactRelationCheckBox" class="form-check-input" type="checkbox">
+                    </div>
+                    <label for="newPatient-contactRelation" class="input-group-text">Relação:</label>
+                    <input  class="form-control" type="text" id="newPatient-contactRelation">
                 </div>
                 <br>
-                <button type="submit" class="btn btn-success btn-register">Cadastrar</button>
+                <button type="submit" class="btn btn-success btn-register">Alterar Informações Pessoais</button>
             </form>
 
             <form class="addressRegistrationForm" id="addressRegistrationForm">
-                <h3>Informações de Endereço</h3>
+                <h3>Informações de Endereço</h3><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressAllCheckBox">
+                    </div>
+                    <input class="form-control" value="Selecionar Todos" type="text" id="addressAll" disabled>
+                </div><br>
                 <div>
-                    <label class="form-label">CEP</label>
                     <div class="input-group">
+                        <div class="input-group-text">
+                            <input type="checkbox" class="form-check-input" id="addressZipcodeCheckBox">
+                        </div>
+                        <label class="input-group-text">CEP</label>
                         <input class="form-control" type="text" id="addressZipcode" aria-describedby="cepSearch" required><br>
                         <span class="input-group-text">
                             <img src="../assets/Magnifying .PNG" id="cepSearch" title="Buscar cep" class="icon">
                         </span>
                     </div>
-                </div>
-                <div>
-                    <label class="form-label">Logradouro:</label><br>
-                    <input class="form-control" type="text" id="addressStreet" required>
-                </div>
-                <div>
-                    <label class="form-label">Número:</label><br>
-                    <input class="form-control" type="text" id="addressNumber" required>
-                </div>
-                <div>
-                    <label class="form-label">Complemento:</label><br>
-                    <input class="form-control" type="text" id="addressComplement" >
-                </div>
-                <div>
-                    <label class="form-label">Bairro:</label><br>
-                    <input class="form-control" type="text" id="addressDistrict" required>
-                </div>
-                <div>
-                    <label class="form-label">Cidade:</label><br>
-                    <input class="form-control" type="text" id="addressCity" required>
-                </div>
-                <div>
-                    <label class="form-label">Estado:</label><br>
-                    <input class="form-control" type="text" id="addressUf" required>
                 </div><br>
-                <button class="btn btn-success" type="submit">Salvar Endereço</button>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressStreetCheckBox">
+                    </div>
+                    <label class="input-group-text">Logradouro:</label><br>
+                    <input class="form-control" type="text" id="addressStreet" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressNumberCheckBox">
+                    </div>
+                    <label class="input-group-text">Número:</label><br>
+                    <input class="form-control" type="text" id="addressNumber" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressComplementCheckBox">
+                    </div>
+                    <label class="input-group-text">Complemento:</label><br>
+                    <input class="form-control" type="text" id="addressComplement" >
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressDistrictCheckBox">
+                    </div>
+                    <label class="input-group-text">Bairro:</label><br>
+                    <input class="form-control" type="text" id="addressDistrict" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressCityCheckBox">
+                    </div>
+                    <label class="input-group-text">Cidade:</label><br>
+                    <input class="form-control" type="text" id="addressCity" required>
+                </div><br>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="form-check-input" id="addressUfCheckBox">
+                    </div>
+                    <label class="input-group-text">Estado:</label><br>
+                    <input class="form-control" type="text" id="addressUf" required>
+                </div><br><br>
+                <button class="btn btn-success" type="submit">Alterar Endereço</button>
             </form>
+        </section>
+        <section class="sectionSpan">
+            <span><br>Selecione apenas os campos que quer alterar , os formulários de endereço e informações pessoais são independentes um do outro </span>
         </section>
     </main>
     <footer class="bd-footer py-4 py-md-5 mt-5 ">

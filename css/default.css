@@ -82,3 +82,10 @@ footer{
 .icon:hover{
   cursor: pointer;
 }
+
+input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+  background-color: #C3DC7E;
+  color: white;
+  border: 0.5px solid  #83935B;
+}

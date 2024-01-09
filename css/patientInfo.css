@@ -14,7 +14,7 @@
     padding: 0 10px;
 }
 
-.form-control:focus , .input-group-text:hover{
+.form-control:focus , .input-group-text:hover, input[type="checkbox"]:focus {
     color: white;
     background-color: #C3DC7E;
     border-color: rgb(131, 147, 91);
@@ -22,6 +22,29 @@
     box-shadow: 0 0 0 0.25rem rgba(131,147,91,.25);
 }
 
+.form-control:disabled{
+    color: white;
+    background-color: #C3DC7E;
+    border-color: rgb(131, 147, 91);
+}
+
 .formSeparator{
     border-right: #83935B solid 3px;
+}
+
+.form-check-input{
+    margin: 0
+}
+
+input[type="checkbox"]:checked  {
+    color: white;
+    background-color: #198754;
+    border-color: white;
+    outline: 0;
+}
+
+.sectionSpan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

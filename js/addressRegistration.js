@@ -1,10 +1,10 @@
-window.onunload = function(event) {
+window.onunload = function() {
     sessionStorage.removeItem("patientId")
 };
 const magnifying = document.getElementById("cepSearch")
 const form = document.getElementById('addressRegistrationForm')
 
-async function buscaCep(cep) {
+async function searchCEP(cep) {
     const cleanCep = cep.value.replace(".", "").replace("-", "");
     const url = `https://viacep.com.br/ws/${cleanCep}/json/`;
     try{
@@ -18,7 +18,7 @@ async function buscaCep(cep) {
 
 magnifying.addEventListener('click', async ()=>{
     const cep = document.getElementById("addressZipcode")
-    const address = await buscaCep(cep)
+    const address = await searchCEP(cep)
     console.log(address)
     fillAdressField(address)
 })

@@ -1,5 +1,6 @@
 const token = sessionStorage.getItem('token')
 const editPatientInfoBtn = document.getElementById("editPatientBtn")
+const editPatientAddresBtn = document.getElementById("editAddresBtn")
 
 async function requestTokenValidation(){
     const payload = {
@@ -209,5 +210,9 @@ async function postPatient(payload){
 }
 
 editPatientInfoBtn.addEventListener('click', ()=>{
+    window.open("../pages/editPatientInfo.html", "_self")
+})
+
+editPatientAddresBtn.addEventListener('click', ()=>{
     window.open("../pages/editPatientInfo.html", "_self")
 })
