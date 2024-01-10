@@ -43,6 +43,9 @@ async function tableRender(){
         ,{
             data: "birthDate"
             ,width: "25%"
+            , render: function(data){
+                return moment(data).format("DD/MM/YYYY")
+            }
         },
         {
             data: "completeData",
@@ -78,7 +81,7 @@ function openPacientInfo(data){
     data = JSON.parse(data)
     const nameTextNode = document.createTextNode(data.name)
     const CPFTextNode = document.createTextNode(data.cpf)
-    const birthDateTextNode = document.createTextNode(data.birthDate)
+    const birthDateTextNode = document.createTextNode(moment(data.birthDate).format("DD/MM/YYYY"))
     const phoneTextNode = document.createTextNode(data.phone)
     const cellphoneTextNode = document.createTextNode(data.cellphone)
     const emailTextNode = document.createTextNode(data.email)
@@ -122,8 +125,8 @@ $("#patientAddressModal").on('hidden.bs.modal', ()=>{
 async function openAddress(id){
     const data = await getAddress(id)
     if(data != ''){
-        console.log(data)
         const span = document.getElementById("addressSpan")
+        span.childNodes.forEach((node)=> span.removeChild(node))
         let text
         if(data[0].complement ===  "-"){
             text = document.createTextNode(data[0].street + "," + data[0].number + " - "  + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
