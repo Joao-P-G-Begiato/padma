@@ -54,7 +54,9 @@ async function tableRender(){
                 return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>
                 <img src = "../assets/map.PNG" title='endereço do paciente' class = "icon" onclick = 'openAddress("${JSON.parse(data).patientId}")'>
                 <img src = "../assets/Anamnesis.PNG" title='Anamnese' class = "icon" onclick = 'notImplemented(${JSON.stringify(data)})'>
+                <img src = "../assets/package.PNG" title='Pacotes' class = "icon" onclick = 'notImplemented("${JSON.parse(data).patientId}")'>
                 <img src = "../assets/Padma.PNG" title='Marcar Consulta' class = "icon" onclick = 'notImplemented(${JSON.stringify(data)})'>
+                <img src = "../assets/trash.PNG" title='Deletar Paciente' class = "icon" onclick = 'deleteIconClick("${JSON.parse(data).patientId}")'>
                 `
             }
         }
@@ -210,6 +212,17 @@ async function postPatient(payload){
     const url = "https://padma-pl.onrender.com/patient"
     const response = await axios.post(url, payload)
     return response
+}
+async function deletePatient(id){
+    const url = "https://padma-pl.onrender.com/patient/"+id
+    const response = await axios.delete(url)
+    return response
+}
+
+async function deleteIconClick(id){
+    if(confirm("Você tem certeza que quer deletar o registro desse paciente ?")){
+
+    }
 }
 
 editPatientInfoBtn.addEventListener('click', ()=>{
