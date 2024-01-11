@@ -43,6 +43,9 @@ async function tableRender(){
         ,{
             data: "birthDate"
             ,width: "25%"
+            , render: function(data){
+                return moment(data).format("DD/MM/YYYY")
+            }
         },
         {
             data: "completeData",
@@ -51,7 +54,9 @@ async function tableRender(){
                 return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>
                 <img src = "../assets/map.PNG" title='endereço do paciente' class = "icon" onclick = 'openAddress("${JSON.parse(data).patientId}")'>
                 <img src = "../assets/Anamnesis.PNG" title='Anamnese' class = "icon" onclick = 'notImplemented(${JSON.stringify(data)})'>
+                <img src = "../assets/package.PNG" title='Pacotes' class = "icon" onclick = 'notImplemented("${JSON.parse(data).patientId}")'>
                 <img src = "../assets/Padma.PNG" title='Marcar Consulta' class = "icon" onclick = 'notImplemented(${JSON.stringify(data)})'>
+                <img src = "../assets/trash.PNG" title='Deletar Paciente' class = "icon" onclick = 'deleteIconClick("${JSON.parse(data).patientId}")'>
                 `
             }
         }
@@ -78,7 +83,7 @@ function openPacientInfo(data){
     data = JSON.parse(data)
     const nameTextNode = document.createTextNode(data.name)
     const CPFTextNode = document.createTextNode(data.cpf)
-    const birthDateTextNode = document.createTextNode(data.birthDate)
+    const birthDateTextNode = document.createTextNode(moment(data.birthDate).format("DD/MM/YYYY"))
     const phoneTextNode = document.createTextNode(data.phone)
     const cellphoneTextNode = document.createTextNode(data.cellphone)
     const emailTextNode = document.createTextNode(data.email)
@@ -122,8 +127,8 @@ $("#patientAddressModal").on('hidden.bs.modal', ()=>{
 async function openAddress(id){
     const data = await getAddress(id)
     if(data != ''){
-        console.log(data)
         const span = document.getElementById("addressSpan")
+        span.childNodes.forEach((node)=> span.removeChild(node))
         let text
         if(data[0].complement ===  "-"){
             text = document.createTextNode(data[0].street + "," + data[0].number + " - "  + data[0].district + ", " + data[0].city + " - " + data[0].UF + ", " + data[0].zipcode)
@@ -207,6 +212,17 @@ async function postPatient(payload){
     const url = "https://padma-pl.onrender.com/patient"
     const response = await axios.post(url, payload)
     return response
+}
+async function deletePatient(id){
+    const url = "https://padma-pl.onrender.com/patient/"+id
+    const response = await axios.delete(url)
+    return response
+}
+
+async function deleteIconClick(id){
+    if(confirm("Você tem certeza que quer deletar o registro desse paciente ?")){
+
+    }
 }
 
 editPatientInfoBtn.addEventListener('click', ()=>{
