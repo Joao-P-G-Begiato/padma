@@ -112,4 +112,5 @@ function disableInput (boolean){
     document.getElementById("login-input").disabled = boolean
     document.getElementById("password-input").disabled = boolean
     document.getElementById("submitBtn").disabled = boolean
+    document.getElementById("registerBtn").disabled = boolean
 }
