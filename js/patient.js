@@ -34,22 +34,22 @@ async function tableRender(){
     const columns = [
         {
             data: "name"
-            ,width: "30%"
+            ,width: "25%"
         }
         ,{
             data: "cpf"
-            ,width: "25%"
+            ,width: "20%"
         }
         ,{
             data: "birthDate"
-            ,width: "25%"
+            ,width: "20%"
             , render: function(data){
                 return moment(data).format("DD/MM/YYYY")
             }
         },
         {
             data: "completeData",
-            width: "20%",
+            width: "35%",
             render: function(data){
                 return `<img src = "../assets/person-card.PNG" title='informações do paciente' class = "icon" onclick = 'openPacientInfo(${JSON.stringify(data)})'>
                 <img src = "../assets/map.PNG" title='endereço do paciente' class = "icon" onclick = 'openAddress("${JSON.parse(data).patientId}")'>
@@ -232,3 +232,4 @@ editPatientInfoBtn.addEventListener('click', ()=>{
 editPatientAddresBtn.addEventListener('click', ()=>{
     window.open("../pages/editPatientInfo.html", "_self")
 })
+
